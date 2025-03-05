@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete Elephant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 200px;
+            width: 100%;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input {
+            height: 30px;
+            width: 150px;
+        }
+        button {
+            background-color: #f44336;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #d32f2f;
+        }
+        #message {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Delete Elephant</h1>
+    <form id="deleteElephantForm">
+        <label for="elephant_id">Elephant ID:</label>
+        <input type="number" id="elephant_id" name="elephant_id" required><br>
+        <button type="submit">Delete Elephant</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        document.getElementById('deleteElephantForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const elephantId = document.getElementById('elephant_id').value;
+
+            if (elephantId) {
+                $.ajax({
+                    url: 'delete3.php',
+                    type: 'POST',
+                    data: { elephant_id: elephantId },
+                    success: function(response) {
+                        document.getElementById('message').innerText = response;
+                        document.getElementById('deleteElephantForm').reset();
+                    },
+                    error: function(xhr, status, error) {
+                        document.getElementById('message').innerText = "Error deleting elephant. Please try again.";
+                    }
+                });
+            } else {
+                document.getElementById('message').innerText = "Please fill in the elephant ID.";
+            }
+        });
+    </script>
+</body>
+</html>

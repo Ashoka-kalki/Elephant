@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elephant Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1, h2 {
+            color: #2E8B57;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin: 10px 0 5px;
+        }
+        input {
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 200px;
+        }
+        button {
+            padding: 5px 10px;
+            background-color: #2E8B57;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #1E5E37;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+        }
+        button.delete-btn {
+            background-color: #ff4d4d;
+            padding: 5px;
+        }
+        button.delete-btn:hover {
+            background-color: #cc0000;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elephant Management System</h1>
+    <form id="add-elephant-form">
+        <h2>Add Elephant</h2>
+        <label for="elephant-name">Name:</label>
+        <input type="text" id="elephant-name" required>
+        <label for="elephant-age">Age:</label>
+        <input type="number" id="elephant-age" required>
+        <label for="elephant-gender">Gender:</label>
+        <input type="text" id="elephant-gender" required>
+        <button type="submit">Add Elephant</button>
+    </form>
+    
+    <h2>Elephant List</h2>
+    <ul id="elephant-list"></ul>
+
+    <script>
+        document.getElementById("add-elephant-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("elephant-name").value;
+            const age = document.getElementById("elephant-age").value;
+            const gender = document.getElementById("elephant-gender").value;
+            
+            addElephant(name, age, gender);
+            this.reset();
+        });
+
+        function addElephant(name, age, gender) {
+            const elephantList = document.getElementById("elephant-list");
+
+            const elephantItem = document.createElement("li");
+            elephantItem.textContent = `Name: ${name}, Age: ${age}, Gender: ${gender}`;
+            
+            const deleteButton = document.createElement("button");
+            deleteButton.textContent = "Remove";
+            deleteButton.classList.add("delete-btn");
+            deleteButton.addEventListener("click", function() {
+                elephantList.removeChild(elephantItem);
+            });
+
+            elephantItem.appendChild(deleteButton);
+            elephantList.appendChild(elephantItem);
+        }
+    </script>
+</body>
+</html>

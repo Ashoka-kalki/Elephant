@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Elephant</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 200px;
+            width: 100%;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input {
+            height: 30px; /* Increase the height */
+            width: 150px; /* Decrease the width */
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Update Elephant</h1>
+    <form id="updateElephantForm" onsubmit="updateElephant(event)">
+        <label for="elephant_id">Elephant ID:</label>
+        <input type="number" id="elephant_id" name="elephant_id" required><br>
+
+        <label for="new_name">New Name:</label>
+        <input type="text" id="new_name" name="new_name" required><br>
+
+        <label for="new_age">New Age:</label>
+        <input type="number" id="new_age" name="new_age" required><br>
+
+        <label for="new_maavootha">New Maavootha:</label>
+        <input type="text" id="new_maavootha" name="new_maavootha" required><br>
+
+        <button type="submit">Update Elephant</button>
+    </form>
+
+    <div id="message"></div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        function updateElephant(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const elephantId = document.getElementById('elephant_id').value;
+            const newName = document.getElementById('new_name').value;
+            const newAge = document.getElementById('new_age').value;
+            const newMaavootha = document.getElementById('new_maavootha').value;
+
+            if (elephantId && newName && newAge && newMaavootha) {
+                $.ajax({
+                    url: 'update2.php',
+                    type: 'POST',
+                    data: {
+                        elephant_id: elephantId,
+                        new_name: newName,
+                        new_age: newAge,
+                        new_maavootha: newMaavootha
+                    },
+                    success: function(response) {
+                        document.getElementById('message').innerText = "Elephant updated successfully!";
+                        document.getElementById('updateElephantForm').reset();
+                    },
+                    error: function() {
+                        document.getElementById('message').innerText = "Error updating elephant. Please try again.";
+                    }
+                });
+            } else {
+                document.getElementById('message').innerText = "Please fill in all fields.";
+            }
+        }
+    </script>
+</body>
+</html>

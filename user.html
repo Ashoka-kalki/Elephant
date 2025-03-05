@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('https://wallpaperaccess.com/full/1093505.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            font-size: 1.2em;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error-message, .success-message {
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
+
+        .register-link, .forgot-password-link {
+            margin-top: 10px;
+            display: block;
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .register-link:hover, .forgot-password-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <ul>
+            <li>
+                <i class="fas fa-language" title="Translate to Kannada" onclick="translateToKannada()"></i>
+            </li>
+            <li>
+                <i class="fas fa-flag-usa" title="Translate to English" onclick="translateToEnglish()"></i>
+            </li>
+        </ul>
+        <h2>Login</h2>
+        <form id="loginForm" action="elephant1.html">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <div class="input-group">
+                    <input type="password" id="password" name="password" required>
+                    <span class="toggle-password" onclick="togglePassword()">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+            </div>
+            <button type="submit"><i class="fas fa-sign-in-alt"></i> Login</button>
+            <a href="register.html" class="register-link">Register</a>
+            <a href="reset.html" class="forgot-password-link">Forgot Password?</a>
+        </form>
+        <p id="login-error-message" class="error-message"></p>
+        <p id="login-success-message" class="success-message"></p>
+    </div>
+
+    <div class="container" id="register-container" style="display: none;">
+        <h2>Register</h2>
+        <form id="registerForm" onsubmit="register(event)">
+            <div class="input-group">
+                <label for="regUsername">Username</label>
+                <input type="text" id="regUsername" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="regPassword">Password</label>
+                <input type="password" id="regPassword" name="password" required>
+                <span class="toggle-password" onclick="togglePassword()">
+                    <i class="fas fa-eye"></i>
+                </span>
+            </div>
+            <button type="submit">Register</button> <!-- Ensure the button type is 'submit' -->
+        </form>
+        <p id="register-error-message" class="error-message"></p>
+        <p id="register-success-message" class="success-message"></p>
+    </div>
+
+    <script>
+        // Show login form and hide register form
+        function showLoginForm() {
+            document.getElementById('login-container').style.display = 'block';
+            document.getElementById('register-container').style.display = 'none';
+        }
+
+        // Show register form and hide login form
+        function showRegisterForm() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('register-container').style.display = 'block';
+        }
+
+        // Toggle password visibility for login and register forms
+        function togglePassword(fieldId, toggleIcon) {
+            const passwordField = document.getElementById(fieldId);
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈'; // Change icon to hide password
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️'; // Change icon to show password
+            }
+        }
+
+        // Register function
+        function register(event) {
+            event.preventDefault(); // Prevent form submission
+            const newUsername = document.getElementById('regUsername').value;
+            const newPassword = document.getElementById('regPassword').value;
+
+            if (newUsername && newPassword) {
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+                if (users[newUsername]) {
+                    alert("Username already exists. Please choose a different username.");
+                } else {
+                    users[newUsername] = newPassword;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    alert("Registration Successful. Please Login.");
+                    showLoginForm();
+                }
+            } else {
+                alert("Please enter both username and password.");
+            }
+        }
+
+        // Login function
+        function login(event) {
+            event.preventDefault();
+            const enteredUsername = document.getElementById('username').value;
+            const enteredPassword = document.getElementById('password').value;
+
+            const users = JSON.parse(localStorage.getItem('users') || '{}');
+
+            if (users[enteredUsername] && users[enteredUsername] === enteredPassword) {
+                alert("Login Successful! Welcome, " + enteredUsername + "!");
+                // Redirect to the next page
+                window.location.href = "elephant2.html";
+            } else {
+                alert('Invalid username or password.');
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body{
+            background-image: url('http://www.chiangmaicitylife.com/wp-content/uploads/2015/03/elephant-feast.jpg');
+            background-size: cover, cover;
+            background-position: center, top right;
+            background-repeat: no-repeat, no-repeat;
+            
+        }
+        .styled-button {
+            background-color: #4CAF50; /* Green background */
+            border: none; /* Remove border */
+            color: white; /* White text */
+            padding: 20px 32px; /* Increased padding for more height */
+            text-align: center; /* Centered text */
+            text-decoration: none; /* Remove underline */
+            display: inline-block; /* Inline-block element */
+            font-size: 16px; /* Increase font size */
+            margin: 4px 2px; /* Some margin */
+            cursor: pointer; /* Pointer/hand icon */
+            border-radius: 8px; /* Rounded corners */
+            transition: background-color 0.3s; /* Smooth transition */
+            width: 200px; /* Fixed width */
+        }
+        h1{
+            text-align: center;
+            color: white;
+        }
+        .styled-button:hover {
+            background-color: #45a049; /* Darker green on hover */
+            text-align:center;
+        }
+        .button-container {
+            display: flex;
+            justify-content: top left; /* Center align buttons horizontally */
+            align-items: center; /* Center align buttons vertically */
+            height: 100vh; /* Full height to center vertically */
+            flex-direction: column; /* Stack buttons vertically */
+        }
+    </style>
+</head>
+<body>
+    <h1>Forest Department</h1>
+
+<div class="button-container">
+    <button class="styled-button" onclick="window.location.href='addelephant5.html';">Add Elephant</button>
+    <button class="styled-button"onclick="window.location.href='delete5.html';">Delete Elephant</button>
+    <button class="styled-button"onclick="window.location.href='update5.html';">update Details</button>
+    <button class="styled-button"onclick="window.location.href='view5.html';">View Data</button>
+</div>
+
+</body>
+</html>
