@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reset Password Page</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('https://wallpaperaccess.com/full/1093505.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error-message {
+            color: red;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="reset-container">
+        <h2>Reset Password</h2>
+        <form id="resetForm">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="reset-username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="new-password">New Password</label>
+                <input type="password" id="new-password" name="password" required>
+            </div>
+            <button type="submit">Reset Password</button>
+        </form>
+        <p id="reset-error-message" class="error-message"></p>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        document.getElementById('resetForm').addEventListener('submit', function (event) {
+            event.preventDefault(); // Prevent form submission
+
+            const username = document.getElementById('reset-username').value;
+            const newPassword = document.getElementById('new-password').value;
+
+            if (username === '' || newPassword === '') {
+                document.getElementById('reset-error-message').textContent = 'Please fill in all fields.';
+            } else {
+                let users = JSON.parse(localStorage.getItem('users') || '{}');
+
+                if (!users[username]) {
+                    document.getElementById('reset-error-message').textContent = 'Username does not exist.';
+                } else {
+                    users[username] = newPassword;
+                    localStorage.setItem('users', JSON.stringify(users));
+                    document.getElementById('reset-error-message').textContent = 'Password reset successfully!';
+                    document.getElementById('reset-error-message').style.color = 'green';
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Elephant</title>
+    <style>
+        body {
+            font-family: Times New Roman, Times serif;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #333;
+        }
+        form {
+            background: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 230px;
+            width: 80%;
+        }
+        label, input {
+            display: block;
+            width: 100%;
+            margin-bottom: 10px;
+        }
+        input {
+            height: 30px; 
+            width: 200px; 
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 80%;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #message {
+            margin-top: 20px;
+            color: #555;
+        }
+    </style>
+</head>
+<body>
+    <h1>Add Elephant</h1>
+    <form id="elephantForm" onsubmit="addElephant(event)">
+
+        <label for="SL_NO">SL_NO:</label>
+        <input type="number" id="SL_NO" name="SL_NO" required><br> 
+
+        <label for="Elephant_Name">Elephant Name:</label>
+        <input type="text" id="Elephant_Name" name="Elephant_Name" required><br>
+
+        <label for="Age">Age:</label>
+        <input type="number" id="Age" name="Age" required><br>
+
+        <label for="Mavootha">Mavootha:</label>
+        <input type="text" id="Mavootha" name="Mavootha" required><br>
+
+        <button type="submit">Add Elephant</button>
+    </form>
+
+    <div id="message"></div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script>
+        function addElephant(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const SL_NO = document.getElementById('SL_NO').value; 
+            const Elephant_Name = document.getElementById('Elephant_Name').value;
+            const Age = document.getElementById('Age').value;
+            const Mavootha = document.getElementById('Mavootha').value;
+
+            if (Elephant_Name && Age && Mavootha) {
+                $.ajax({
+                    url: 'add.php',
+                    type: 'POST',
+                    data: {
+                        SL_NO: SL_NO,
+                        Elephant_Name: Elephant_Name,
+                        Age: Age,
+                        Mavootha: Mavootha
+                    },
+                    success: function(response) {
+                        document.getElementById('message').innerText = "Elephant added successfully!";
+                        document.getElementById('elephantForm').reset();
+                    },
+                    error: function() {
+                        document.getElementById('message').innerText = "Error adding elephant. Please try again.";
+                    }
+                });
+            } else {
+                document.getElementById('message').innerText = "Please fill in all fields.";
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Gallery</title>
+    <!-- Add Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background-image: url("https://files.prokerala.com/news/photos/imgs/800/a-silhouette-of-dasara-elephants-outside-the-736725.jpg");
+            background-size: cover; /* Cover the entire window */
+            background-position: center; /* Center the image */
+            background-repeat: no-repeat; /* Do not repeat the image */
+            background-attachment: fixed; /* Fix the background image */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative; /* To position elements within header */
+        }
+
+        .hamburger {
+            display: inline-block;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            right: 20px; /* Positioning it on the right side */
+        }
+
+        .hamburger div {
+            width: 35px;
+            height: 4px;
+            background-color: #fff;
+            margin: 6px 0;
+            transition: 0.4s;
+        }
+
+        .hamburger:hover div {
+            background-color: #777;
+        }
+
+        .dropdown-menu {
+            display: none;
+            position: absolute;
+            right: 20px;
+            top: 50px;
+            background-color: #333;
+            border: 1px solid #777;
+            z-index: 1;
+        }
+
+        .dropdown-menu a {
+            color: #fff;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown-menu a:hover {
+            background-color: #777;
+        }
+
+        .language-icons {
+            position: absolute;
+            top: 50%;
+            left: 20px;
+            transform: translateY(-50%);
+        }
+
+        .language-icons ul {
+            list-style-type: none; /* Remove default list styling */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .language-icons li {
+            display: inline;
+        }
+
+        .language-icons img {
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+        }
+
+        .language-icons i {
+            font-size: 24px;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        .language-icons i:hover {
+            color: #777;
+        }
+
+        main {
+            padding: 20px;
+            position: relative;
+            height: 100vh;
+        }
+
+        .gallery {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            gap: 20px;
+            height: 100%;
+        }
+
+        .image-container {
+            text-align: center;
+            margin: 10px;
+            position: relative; /* To position the description */
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 8px;
+            width: 150px; /* Set a smaller size for the images */
+            height: auto;
+        }
+
+        /* Positioning and resizing the first image (top-center) */
+        .image-container:nth-child(1) {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px; /* Set a smaller size for the image container */
+            height: 100px; /* Ensure the container remains circular */
+            overflow: hidden;
+        }
+
+        .image-container:nth-child(1) img {
+            width: 100%; /* Ensure the image fills the container */
+            height: 100%; /* Ensure the image fills the container */
+            border-radius: 50%; /* Make the image circular */
+        }
+
+        /* Positioning and resizing the second image (top-left) */
+        .image-container:nth-child(2) {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            width: 100px; /* Set the same size for the image container as the third image */
+            height: 100px; /* Ensure the container remains circular */
+            overflow: hidden;
+        }
+
+        .image-container:nth-child(2) img {
+            width: 100%; /* Ensure the image fills the container */
+            height: 100%; /* Ensure the image fills the container */
+            border-radius: 50%; /* Make the image circular */
+        }
+
+        /* Positioning and resizing the third image (top-right) */
+        .image-container:nth-child(3) {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 100px; /* Set the same size for the image container as the second image */
+            height: 100px; /* Ensure the container remains circular */
+            overflow: hidden;
+        }
+
+        .image-container:nth-child(3) img {
+            width: 100%; /* Ensure the image fills the container */
+            height: 100%; /* Ensure the image fills the container */
+            border-radius: 50%; /* Make the image circular */
+        }
+
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="hamburger" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="dept.html" id="dept-link">Departments</a>
+            <a href="user.html" id="user-link">User</a>
+            <a href="about.html" id="about-link">About Us</a>
+            <a href="logout.html" id="logout-link">Log out</a>
+        </div>
+        <div class="language-icons">
+            <ul>
+                <li>
+                    <i class="fas fa-language" title="Translate to Kannada" onclick="setLanguagePreference('kannada')"></i>
+                </li>
+                <li>
+                    <i class="fas fa-flag-usa" title="Translate to English" onclick="setLanguagePreference('english')"></i>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        <div class="gallery">
+            <!-- First Image (Top-Center) -->
+            <div class="image-container">
+                <img src="https://www.jobskar.com/uploads/orgimg/4e0b3fd73a6279228c7e01ea7811e3d1.png" alt="Top-Center Image">
+            </div>
+            <!-- Second Image (Top-Left) -->
+            <div class="image-container">
+                <img src="https://www.coorgnews.in/wp-content/uploads/2024/08/siddaramaiah-photo.jpg" alt="Top-Left Image">
+            </div>
+            <!-- Third Image (Top-Right) -->
+            <div class="image-container">
+                <img src="https://kannada.oneindia.com/img/2018/07/eshwar-khandre-1531812896.jpg" alt="Top-Right Image">
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p id="footer-text">&copy; 2023 My Image Gallery. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // Function to toggle the dropdown menu
+        function toggleMenu() {
+            var menu = document.getElementById("dropdown-menu");
+            if (menu.style.display === "block") {
+                menu.style.display = "none";
+            } else {
+                menu.style.display = "block";
+            }
+        }
+
+        // Function to set language preference
+        function setLanguagePreference(language) {
+            localStorage.setItem('language', language);
+            translatePage(language);
+        }
+
+        // Function to translate the page
+        function translatePage(language) {
+            const translations = {
+                english: {
+                    title: "Image Gallery",
+                    dept: "Departments",
+                    user: "User",
+                    about: "About Us",
+                    logout: "Log out",
+                    footer: "© 2023 My Image Gallery. All rights reserved."
+                },
+                kannada: {
+                    title: "ಚಿತ್ರ ಗ್ಯಾಲರಿ",
+                    dept: "ಇಲಾಖೆಗಳು",
+                    user: "ಬಳಕೆದಾರ",
+                    about: "ನಮ್ಮ ಬಗ್ಗೆ",
+                    logout: "ಲಾಗ್ ಔಟ್",
+                    footer: "© 2023 ನನ್ನ ಚಿತ್ರ ಗ್ಯಾಲರಿ. ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ."
+                }
+            };
+
+            // Update the page content based on the selected language
+            document.querySelector('title').textContent = translations[language].title;
+            document.getElementById('dept-link').textContent = translations[language].dept;
+            document.getElementById('user-link').textContent = translations[language].user;
+            document.getElementById('about-link').textContent = translations[language].about;
+            document.getElementById('logout-link').textContent = translations[language].logout;
+            document.getElementById('footer-text').textContent = translations[language].footer;
+        }
+
+        // Check for language preference on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            var language = localStorage.getItem('language') || 'english'; // Default to English
+            translatePage(language);
+        });
+    </script>
+</body>
+</html>

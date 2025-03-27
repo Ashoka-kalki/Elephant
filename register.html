@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Page</title>
+    <style>
+        /* CSS Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            background-image: url('https://wallpaperaccess.com/full/1093505.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            text-align: center;
+            margin: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+            position: relative;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .password-toggle {
+            position: absolute;
+            right: 10px;
+            top: 35px;
+            cursor: pointer;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #218838;
+        }
+
+        .error-message, .success-message {
+            margin-top: 10px;
+        }
+
+        .error-message {
+            color: red;
+        }
+
+        .success-message {
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" action="register.php" method="post" onsubmit="showSuccessMessage(event, 'login-success-message')">
+            <div class="input-group">
+                <label for="login-username">Username</label>
+                <input type="text" id="login-username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" name="password" required>
+                <span class="password-toggle" onclick="togglePassword('login-password', this)">👁️</span>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+        <p id="login-error-message" class="error-message"></p>
+        <p id="login-success-message" class="success-message"></p>
+    </div>
+
+    <div class="container" id="register-container" style="display: none;">
+        <h2>Register</h2>
+        <form id="registerForm" action="register.php" method="post" onsubmit="showSuccessMessage(event, 'register-success-message')">
+            <div class="input-group">
+                <label for="register-username">Username</label>
+                <input type="text" id="register-username" name="username" required>
+            </div>
+            <div class="input-group">
+                <label for="register-password">Password</label>
+                <input type="password" id="register-password" name="password" required>
+                <span class="password-toggle" onclick="togglePassword('register-password', this)">👁️</span>
+            </div>
+            <button type="submit">Register</button>
+        </form>
+        <p id="register-error-message" class="error-message"></p>
+        <p id="register-success-message" class="success-message"></p>
+    </div>
+
+    <script>
+        // Show login form and hide register form
+        function showLoginForm() {
+            document.getElementById('login-container').style.display = 'block';
+            document.getElementById('register-container').style.display = 'none';
+        }
+
+        // Show register form and hide login form
+        function showRegisterForm() {
+            document.getElementById('login-container').style.display = 'none';
+            document.getElementById('register-container').style.display = 'block';
+        }
+
+        // Toggle password visibility for login and register forms
+        function togglePassword(fieldId, toggleIcon) {
+            const passwordField = document.getElementById(fieldId);
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                toggleIcon.textContent = '🙈'; // Change icon to hide password
+            } else {
+                passwordField.type = 'password';
+                toggleIcon.textContent = '👁️'; // Change icon to show password
+            }
+        }
+
+        // Show success message and prevent form submission
+        function showSuccessMessage(event, successMessageId) {
+            event.preventDefault(); // Prevent actual form submission
+            document.getElementById(successMessageId).textContent = 'Success! Form submitted.';
+        }
+    </script>
+</body>
+</html>

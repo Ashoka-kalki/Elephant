@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elephant Camps in Karnataka</title>
+    <style>
+        body {
+            background-image: url('https://cdn.kstdc.co/uploads/2022/06/dbare.jpg');
+            background-size: cover;
+            background-position: center top right;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        li {
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .camp-button {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.2em;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .camp-button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elephant Camps in Karnataka</h1>
+    <ul id="camp-list">
+        <li><button class="camp-button" id="sakrebyle-button">Sakrebyle Camp</button></li>
+        <li><button class="camp-button" id="dubare-button">Dubare Camp</button></li>
+        <li><button class="camp-button" id="mathigodu-button">Mathigodu Camp</button></li>
+        <li><button class="camp-button" id="harangi-button">Harangi Camp</button></li>
+        <li><button class="camp-button" id="balle-button">Balle Camp</button></li>
+        <li><button class="camp-button" id="doddaharave-button">Doddaharave Camp</button></li>
+    </ul>
+
+    <script>
+        document.getElementById('camp-list').addEventListener('click', function(event) {
+            if (event.target && event.target.matches('.camp-button')) {
+                navigateToPage(event.target.id);
+            }
+        });
+
+        function navigateToPage(buttonId) {
+            var pageMap = {
+                'sakrebyle-button': 'button.html',
+                'dubare-button': 'button1.html',
+                'mathigodu-button': 'button2.html',
+                'harangi-button': 'button3.html',
+                'balle-button': 'button4.html',
+                'doddaharave-button':'button5.html'
+            };
+            window.location.href = pageMap[buttonId];
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elephant Camps in Karnataka</title>
+    <style>
+        body {
+            background-image: url('https://static.toiimg.com/photo/imgsize-136690,msid-101496201/101496201.jpg');
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        li {
+            margin: 10px 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+        }
+        .camp-button {
+            width: 100%;
+            max-width: 300px;
+            padding: 15px 30px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2em;
+            text-align: center;
+            display: block;
+            text-decoration: none;
+        }
+        .camp-button.active {
+            cursor: pointer;
+        }
+        .camp-button.active:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h1>Elephant Camps in Karnataka</h1>
+    <ul>
+        <li><a href='#' class="camp-button">Sakrebyle Camp</a></li>
+        <li><a href="#" class="camp-button">Dubare Camp</a></li>
+        <li><a href="#" class="camp-button">Mathigodu Camp</a></li>
+        <li><a href="#" class="camp-button">Harangi Camp</a></li>
+        <li><a href="#" class="camp-button">Balle Camp</a></li>
+        <li><a href="#" class="camp-button">Doddaharave Camp</a></li>
+    </ul>
+
+    <script>
+        document.getElementById('enable-buttons').addEventListener('click', function() {
+            let buttons = document.querySelectorAll('.camp-button');
+            buttons.forEach(button => {
+                button.classList.add('active');
+                button.style.pointerEvents = 'auto';
+            });
+        });
+    </script>
+</body>
+</html>
